@@ -1,8 +1,8 @@
 var app = {
-
-  model: {
+              /* la aplicación usa vble con el 'model',q contiene los datos q almacenaremos en las notas  */
+  model: {    /* el objeto model contiene json, pares clave:valor delimitados por comillas  */
     "notas": [{"titulo": "Comprar pan", "contenido": "Oferta en la panaderia de la esquina"}]
-  },
+  },          /* notas es una lista (delimitada x corchetes), q contiene un objeto lista (delimitado x llaves), con dos campos titulo=comprarpan y contenido=oferta   */
 
   firebaseConfig: {
     apiKey: "AIzaSyDKH83e0nGXVTq1Tx5CexclpxEs12reQKg",
@@ -52,7 +52,8 @@ var app = {
   construirNota: function() {
     var notas = app.model.notas;
     notas.push({"titulo": app.extraerTitulo() , "contenido": app.extraerComentario() });
-  },
+  },      /*  con 'push' conseguimos que la nueva nota se agregue a las demás, cuya info la obtenemos 
+          mediante los componentes de la aplicación 'extraerTitulo y extraerComentario */
 
   extraerTitulo: function() {
     return document.getElementById('titulo').value;
@@ -151,6 +152,6 @@ var app = {
 
 if ('addEventListener' in document) {
   document.addEventListener("deviceready", function() {
-    app.leerDatos();
+    app.leerDatos();    /* nuestra aplicación empezará a ejecutarse cuando el dispositivo esté listo */
   }, false);
 };
