@@ -86,7 +86,8 @@ var app = {
     return "<div class='note-item' id='notas[" + id + "]'>" + titulo + "</div>";
   },
 
-
+/* para que al salir de la app las notas se sigan guardando aplicamos una función de persistencia
+solicitamos a Cordova un storage, 'gotFS' después con 'le pedimos q grabe una versión en JSON de nuestro modelo */
   grabarDatos: function() {
     window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, this.gotFS, this.fail);
   },
@@ -109,6 +110,9 @@ var app = {
     writer.write(JSON.stringify(app.model));
   },
 
+  /* la librería 'firebase' nos permite guardar nuestros datos en la nube.
+  La hemos inicializado más arriba. Y ahora creamos un fichero dentro del storage 
+  de firebase y guardamos ahí nuestro modelo en JSON */
   salvarFirebase: function() {
     var ref = firebase.storage().ref('model.json');
     ref.putString(JSON.stringify(app.model));
